@@ -118,8 +118,9 @@ const toggleLiked = (id) => {
   //===========
 
   return (
-    <>
+    <div className='app'>
 
+      <main className='content'>
     <div className="app-container">
       <div className="hero">
         <h1>Welcome to Movie Collection Manager</h1>
@@ -144,8 +145,9 @@ const toggleLiked = (id) => {
         toggleLiked={toggleLiked}
       />
     </div>
+    </main>
   <Footer />
-  </>
+  </div>
   );
 }
 export default App;
