@@ -1,70 +1,182 @@
-# Getting Started with Create React App
+# 🎬 Movie Collection Manager (MCM)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I built this movie collection management app using React. It lets you search for movies using the OMDB API, track which ones you've watched, like your favorites, edit titles, and everything gets saved automatically to your browser's local storage.
 
-## Available Scripts
+## ✨ What It Can Do
 
+- **Add Movies** - Type any movie title and my app fetches all the details (year, genre, IMDb rating, poster) automatically
+- **Track Watched & Likes** - Click the eye button to mark as watched, click the heart to like a movie
+- **Edit Titles** - Click the pencil icon to edit any movie title right on the card
+- **Delete Movies** - Remove movies you don't want anymore
+- **Saves Everything** - Your collection stays saved even after you close the browser
+- **Works on Any Screen** - The grid layout looks good on desktop, tablet, or phone
+- **Dark Theme** - I went with a dark gradient background because it's easier on the eyes
+
+## 🚀 How to Get It Running
+
+### What You Need
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Steps
+
+1. Clone the repo:
+```bash
+git clone <your-repo-url>
+cd movie-collection-manager
+Install everything:
+
+bash
+npm install
+Start it up:
+
+bash
+npm start
+Open http://localhost:3000 to see it working
+
+🎮 How to Use My App
+Adding a Movie
+Just type a movie name in the search box and hit "Add Movie" or press Enter. The app reaches out to OMDB API and pulls in all the movie details. I built in duplicate detection so you can't add the same movie twice.
+
+What the Buttons Do
+Button	What It Does
+👁	Marks movie as watched (lights up red)
+❤️/🤍	Like or unlike a movie
+✏️	Edit the title (click ✅ to save, ❌ to cancel)
+🔄	Refresh the movie data
+🗑	Delete the movie
+Where Your Data Goes
+I set it up so everything saves to your browser's local storage. Close the browser, come back tomorrow, your movies and all your watched/liked status will still be there.
+
+📁 How I Structured the Code
+text
+src/
+├── components/
+│   ├── MovieCard.js      # Each movie card with all its buttons
+│   ├── MovieForm.js      # The search form at the top
+│   ├── MovieList.js      # The grid that holds all the cards
+│   ├── MovieService.js   # My OMDB API connection
+│   └── Footer.js         # Simple footer
+├── App.js                # Main component with all the state logic
+├── App.css               # All the styling
+├── index.js              # Entry point
+└── index.css             # Global styles
+🔑 About the API Key
+I hardcoded my OMDB API key (d76463de) in MovieService.js. If you hit rate limits or want to use your own:
+
+Get your free key from OMDB API
+
+Open src/components/MovieService.js
+
+Replace my key with yours:
+
+javascript
+const OMDB_API_KEY = "your-key-here";
+🎨 How to Customize the Look
+Change Colors
+In App.css, I set up CSS variables so you can easily change the theme:
+
+css
+:root {
+  --bg-main: #0f172a;    /* Main background - dark blue */
+  --bg-card: #1e293b;     /* Card background - lighter blue */
+  --accent: #e50914;      /* Accent color - Netflix red */
+  --text-main: #f8fafc;   /* Main text - off white */
+  --text-muted: #94a3b8;  /* Secondary text - gray */
+}
+Change the Grid
+Want more or fewer cards per row? Edit this in App.css:
+
+css
+.movie-grid {
+  grid-template-columns: repeat(auto-fill, minmax(209px, 1fr));
+  gap: 45px;
+}
+Adjust Hover Effect
+The cards pop up when you hover. Change it here:
+
+css
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+📱 How It Handles Different Screens
+Desktop: Shows 4-5 cards in a row
+
+Tablet: Shows 2-3 cards
+
+Phone: Shows 1 card
+
+Posters are fixed at 300px height and use object-fit: cover so they don't look stretched
+
+🛠️ What I Built It With
+React - The whole frontend framework
+
+OMDB API - Where movie data comes from
+
+Local Storage - For saving your collection
+
+CSS3 - All the styling, animations, grid, and flexbox
+
+📦 Available Scripts
 In the project directory, you can run:
 
-### `npm start`
+npm start
+Runs the app in development mode. Opens on http://localhost:3000
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm test
+Launches the test runner
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm run build
+Builds the app for production into the build folder
 
-### `npm test`
+npm run eject
+Ejects from Create React App (one-way operation, can't go back)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+⚠️ Things to Know
+The OMDB API free tier has daily request limits
 
-### `npm run build`
+Really obscure movies might return "Movie not found"
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Ratings come from IMDb (0-10 scale)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sometimes OMDB doesn't have a poster, so it shows a placeholder
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The API key is visible in the code (this is just for demo purposes)
 
-### `npm run eject`
+🔧 Common Issues
+"Movie not found" error
+Double-check your spelling
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Try the full title (ex: "The Dark Knight" not just "Dark Knight")
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Some non-English movies aren't in OMDB
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Posters not showing
+OMDB sometimes returns "N/A" for posters
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+I added a placeholder image for these cases
 
-## Learn More
+Local storage not saving
+Make sure your browser allows local storage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Try clearing your browser cache
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+📚 Resources I Used
+React Docs
 
-### Code Splitting
+Create React App Docs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+OMDB API Docs
 
-### Analyzing the Bundle Size
+📄 License
+© 2026 MCM. All rights reserved.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Create React App team for the boilerplate
 
-### Making a Progressive Web App
+Anyone who uses my app!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Enjoy managing your movie collection! 🎬🍿
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built with ❤️
