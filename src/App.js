@@ -118,7 +118,7 @@ const toggleLiked = (id) => {
   //===========
 
   return (
-    <div className='app'>
+    <div className='App'>
 
       <main className='content'>
     <div className="app-container">
