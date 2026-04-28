@@ -15,6 +15,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "_review_scripts": "REVIEW: Inconsistent indentation in scripts block (predeploy/deploy lines use different leading whitespace). REVIEW: `test` and `eject` scripts removed — `npm test` will not work. Re-add `\"test\": \"react-scripts test\"` (and optionally `eject`). REVIEW: No lint script — consider adding `eslint src/`.",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

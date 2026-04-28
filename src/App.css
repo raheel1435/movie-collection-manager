@@ -6,6 +6,7 @@
   --text-muted: #94a3b8;
 }
 
+/* REVIEW: #root min-height is set twice — once here as 100% and again below as 100vh. Pick one. The 100% version is meaningless unless the parent (html/body) also has a defined height, which the next rule provides redundantly. */
 #root {
   min-height: 100%;
 }
@@ -16,6 +17,7 @@ html, body, #root {
 }
 
 
+/* REVIEW: `body` is declared twice back-to-back. Merge into a single rule. */
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -35,6 +37,7 @@ body {
 .content {
   flex: 1;
 }
+/* REVIEW: Dead CSS — .App-logo, .App-header, .App-link, and the App-logo-spin keyframes are leftover Create React App defaults. The current JSX doesn't use any of them. Remove. */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -101,13 +104,17 @@ margin-bottom: 30px;
 
 /* Grid */
 .movie-grid {
+  /* REVIEW: `justify-content` has no effect on a grid container whose tracks already fill the row via `1fr`. Remove. */
   justify-content: center;
   display: grid;
+  /* REVIEW: Inconsistent indentation on this line (single-space) versus the rest of the rule. */
  grid-template-columns: repeat(auto-fill, minmax(209px, 1fr));
+  /* REVIEW: 209px is an oddly specific minmax floor — looks like a one-off tweak. Round to a clean value (e.g. 200px or 220px). */
   gap: 45px;
   margin-top: 20px;
 }
 
+/* REVIEW: Three separate `margin*` declarations override each other awkwardly: `margin: 20px auto` is overridden by the following `margin-bottom`/`margin-top`. Collapse into a single `margin: 120px auto 40px` for clarity. */
 .movie-form {
   display: flex;
   max-width: 600px;
@@ -178,6 +185,7 @@ margin-bottom: 30px;
   word-wrap: break-word;
 }
 
+/* REVIEW: Fixed 300px height with no `object-fit` on the <img>. Different aspect-ratio posters from OMDB will be stretched/squashed. Add `object-fit: cover;`. */
 .poster {
   width: 100%;
   height: 300px;

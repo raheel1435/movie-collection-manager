@@ -12,6 +12,7 @@
 /build
 
 # misc
+# REVIEW: `.env` (without a suffix) is not ignored, only the `*.local` variants are. If you move the OMDB API key into a .env file as recommended, it could be committed by accident. Add `.env` here.
 .DS_Store
 .env.local
 .env.development.local
